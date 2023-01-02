@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Rating from './Rating';
-import Card from 'react-bootstrap/Card';
+import React from "react";
+import { Link } from "react-router-dom";
+import Rating from "./Rating";
+import Card from "react-bootstrap/Card";
 
 export default function Product(
   props // pass props

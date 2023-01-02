@@ -89,7 +89,6 @@ export default function HomeScreen() {
             <h2>Featured Products</h2>
           </Row>
 
-          {/* <h2>Featured Products</h2> */}
           {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
           <Row>
             {products.map((product) => (

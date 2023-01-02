@@ -9,7 +9,6 @@ import productRouter from './routes/productRoutes.js';
 import userRouter from './routes/userRoutes.js';
 import orderRouter from './routes/orderRoutes.js';
 import uploadRouter from './routes/uploadRoutes.js';
-import seedRouter from './routes/seedRoutes.js';
 
 dotenv.config(); // loads .env file contents into ´process.env´
 
@@ -61,13 +60,6 @@ app.get(
 // open mongoose connection to MongoDb
 mongoose.connect(
   process.env.MONGODB_URI || 'mongodb://localhost/ecommerce' // path
-);
-
-/* used to mount the specified middleware function(s) 
-  at the path which is being specified */
-app.use(
-  '/api/seed', // path
-   seedRouter // callback
 );
 
 /* used to mount the specified middleware function(s) 
