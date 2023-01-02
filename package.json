@@ -1,0 +1,21 @@
+{
+  "name": "mern-ecommerce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd backend && npm install  && cd ../frontend && npm install && npm run build",
+    "start": "node backend/server.js"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.2",
+    "@fortawesome/free-solid-svg-icons": "^6.1.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "mdb-react-ui-kit": "^4.1.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.10",
+    "nodemon": "^2.0.20",
+    "postcss": "^8.4.16"
+  }
+}
