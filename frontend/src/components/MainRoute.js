@@ -32,8 +32,8 @@ import SearchScreen from "../screens/SearchScreen";
 import DashboardScreen from "../screens/DashboardScreen";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
-// provider ( fornecedor )
 import { Store } from "../Store";
 import { getError } from "../utils";
 import Axios from "axios";
@@ -42,6 +42,7 @@ import {
   faBars,
   faEllipsisVertical,
   faCircleXmark,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
 /* useContext - The main idea of using the context is to allow your components 
@@ -50,38 +51,17 @@ import {
 
 // main function
 function MainRoute() {
-  const {
-    state,
-    dispatch: ctxDispatch, // get dispatch from useContext
-  } = useContext(
-    Store // pass Store
-  );
+  const { state, dispatch: ctxDispatch } = useContext(Store);
 
-  // // console.log(state);
+  const { cart, userInfo } = state;
 
-  /* get cart and userInfo from the state */
-  const {
-    cart, //get cart from the state
-    userInfo, //get userInfo from the state
-  } = state;
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
 
-  // get array from the useState hook
-  const [
-    sidebarIsOpen, // [0] get sidebarIsOpen from useState
-    setSidebarIsOpen, // [1]
-  ] = useState(
-    false // parameter
-  );
+  const { cartItems } = cart;
 
-  const {
-    cartItems, // get cartItems from the cart
-  } = cart;
-
-  // define signoutHandler function
   const signoutHandler = () => {
-    // dispatch
     ctxDispatch({
-      type: "USER_SIGNOUT", // action.type = 'USER_SIGNOUT'
+      type: "USER_SIGNOUT",
     });
 
     // remove items from localStorage
@@ -185,36 +165,8 @@ function MainRoute() {
                   icon={faEllipsisVertical}
                 />
               </Navbar.Toggle>
-              <Navbar.Collapse id="basic-navbar-nav">                
+              <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                  {userInfo ? (
-                    <NavDropdown
-                      title={"Hello, " + userInfo.name}
-                      id="basic-nav-dropdown"
-                    >
-                      <LinkContainer to="/profile">
-                        <NavDropdown.Item>User Profile</NavDropdown.Item>
-                      </LinkContainer>
-                      <NavDropdown.Divider />
-                      <LinkContainer to="/orderhistory">
-                        <NavDropdown.Item>Order History</NavDropdown.Item>
-                      </LinkContainer>
-
-                      <NavDropdown.Divider />
-                      <Link
-                        className="dropdown-item"
-                        to="#signout"
-                        onClick={signoutHandler}
-                      >
-                        Sign Out
-                      </Link>
-                    </NavDropdown>
-                  ) : (
-                    <Link className="nav-link" to="/signin">
-                      Sign In
-                    </Link>
-                  )}
-
                   {userInfo && userInfo.isSeller && (
                     <NavDropdown title="Seller" id="basic-nav-dropdown">
                       <LinkContainer to="/productlist/seller">
@@ -259,22 +211,57 @@ function MainRoute() {
                       <NavDropdown.Item>Puma</NavDropdown.Item>
                     </LinkContainer>
                   </NavDropdown>
-
-                  <Link to="/cart" className="nav-link">
-                    Cart
-                    {cartItems.length > 0 && (
-                      <span className="badge rounded-pill bg-danger">
-                        {
-                          //use reduce function to calculate accumulator (a) and current item (c)
-                          // default value to accumulator is zero
-                          cartItems.reduce((a, c) => a + c.quantity, 0)
-                        }
-                      </span>
-                    )}
-                  </Link>
+                  
+              <SearchBox />
                 </Nav>
-                <SearchBox />
+                
               </Navbar.Collapse>
+
+              {userInfo ? (
+                <NavDropdown
+                  // add profile icon
+                  title={
+                    <FontAwesomeIcon
+                      className="fa-solid fa-user"
+                      icon={faUser}
+                    />
+                  }
+                  id="basic-nav-dropdown"
+                >
+                  <LinkContainer to="/profile">
+                    <NavDropdown.Item>User Profile</NavDropdown.Item>
+                  </LinkContainer>
+                  <NavDropdown.Divider />
+                  <LinkContainer to="/orderhistory">
+                    <NavDropdown.Item>Order History</NavDropdown.Item>
+                  </LinkContainer>
+
+                  <NavDropdown.Divider />
+                  <Link
+                    className="dropdown-item"
+                    to="#signout"
+                    onClick={signoutHandler}
+                  >
+                    Sign Out
+                  </Link>
+                </NavDropdown>
+              ) : (
+                <Link className="nav-link" to="/signin">
+                  Sign In
+                </Link>
+              )}
+              <Link to="/cart" className="nav-link">
+                <FontAwesomeIcon icon={faShoppingCart} />
+                {cartItems.length > 0 && (
+                  <span className="badge rounded-pill bg-danger">
+                    {
+                      //use reduce function to calculate accumulator (a) and current item (c)
+                      // default value to accumulator is zero
+                      cartItems.reduce((a, c) => a + c.quantity, 0)
+                    }
+                  </span>
+                )}
+              </Link>
             </Container>
           </Navbar>
 

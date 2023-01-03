@@ -7,35 +7,29 @@ import { isAdmin, isAuth, isSellerOrAdmin } from "../utils.js";
 // get productRouter from express.Router()
 const productRouter = express.Router();
 
-// get top products
+//get all products
 productRouter.get(
-  "/top-products", // 1st parameter - api address
-  expressAsyncHandler(
-    async (
-      req, // 1st param - request
-      res // 2nd param - response
-    ) => {
-      // get products using Product.find()
-      const products = await Product.find()
-        .populate(
-          "seller", // 1st param
-          "seller.name seller.logo" // 2nd param
-        )
-        .sort({
-          rating: -1, // pass rating
-        })
-        .limit(
-          4 // pass 4
-        );
-      // response
-      res.send(
-        products // pass products
-      );
-    } // pass async function
-  ) // 2nd parameter - expressAsyncHandler
+  "/all",
+  expressAsyncHandler(async (req, res) => {
+    const products = await Product.find({});
+    res.send(products);
+  })
 );
 
-// get seller by id
+// get top products
+productRouter.get(
+  "/top-products",
+  expressAsyncHandler(async (req, res) => {
+    const products = await Product.find()
+      .populate("seller", "seller.name seller.logo")
+      .sort({
+        rating: -1,
+      })
+      .limit(4);
+    res.send(products);
+  })
+);
+
 productRouter.get(
   "/sellers/:id", // 1st parameter - api address
   expressAsyncHandler(
