@@ -173,16 +173,7 @@ export default function ProfileScreen() {
                   onChange={(e) => setSellerLogo(e.target.value)}
                   required
                 />
-              </Form.Group>
-
-              <Form.Group className="mb-3" controlId="sellerLogo">
-                <Form.Label>Seller Logo</Form.Label>
-                <Form.Control
-                  value={sellerLogo}
-                  onChange={(e) => setSellerLogo(e.target.value)}
-                  required
-                />
-              </Form.Group>
+              </Form.Group>             
               <FloatingLabel
                 controlId="floatingTextarea"
                 label="Comments"
