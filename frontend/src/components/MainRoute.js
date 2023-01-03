@@ -211,20 +211,23 @@ function MainRoute() {
                       <NavDropdown.Item>Puma</NavDropdown.Item>
                     </LinkContainer>
                   </NavDropdown>
-                  
-              <SearchBox />
+
+                  <SearchBox />
                 </Nav>
-                
               </Navbar.Collapse>
 
               {userInfo ? (
                 <NavDropdown
                   // add profile icon
+
                   title={
-                    <FontAwesomeIcon
-                      className="fa-solid fa-user"
-                      icon={faUser}
-                    />
+                    <span>
+                      {userInfo.name + "  "}
+                       <FontAwesomeIcon
+                        className="fa-solid fa-user"
+                        icon={faUser}
+                      />
+                    </span>
                   }
                   id="basic-nav-dropdown"
                 >

@@ -7,15 +7,6 @@ import { isAdmin, isAuth, isSellerOrAdmin } from "../utils.js";
 // get productRouter from express.Router()
 const productRouter = express.Router();
 
-//get all products
-productRouter.get(
-  "/all",
-  expressAsyncHandler(async (req, res) => {
-    const products = await Product.find({});
-    res.send(products);
-  })
-);
-
 // get top products
 productRouter.get(
   "/top-products",
@@ -29,6 +20,7 @@ productRouter.get(
     res.send(products);
   })
 );
+
 
 productRouter.get(
   "/sellers/:id", // 1st parameter - api address
@@ -77,7 +69,7 @@ productRouter.get(
 );
 
 // define PAGE_SIZE
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 9;
 productRouter.get(
   "/", // 1st parameter - api address
   expressAsyncHandler(
