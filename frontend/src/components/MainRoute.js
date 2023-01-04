@@ -198,7 +198,7 @@ function MainRoute() {
                     </NavDropdown>
                   )}
 
-                  <NavDropdown title="Sellers" id="basic-nav-dropdown">
+                  <NavDropdown title="Brands" id="basic-nav-dropdown">
                     <LinkContainer to="/seller/63b319c984517d0f978e7ffe">
                       <NavDropdown.Item>Nike</NavDropdown.Item>
                     </LinkContainer>
