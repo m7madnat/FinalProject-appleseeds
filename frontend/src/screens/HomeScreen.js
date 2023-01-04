@@ -1,31 +1,29 @@
-import React, { useEffect, useReducer } from 'react';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { Carousel } from 'react-responsive-carousel';
-import Product from '../components/Product';
-import LoadingBox from '../components/LoadingBox';
-import MessageBox from '../components/MessageBox';
-import { Link } from 'react-router-dom';
-import Axios from 'axios';
-import { getError } from '../utils';
-import AllProduct from './AllProduct';
-
-
+import React, { useEffect, useReducer } from "react";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+import Product from "../components/Product";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
+import { Link } from "react-router-dom";
+import Axios from "axios";
+import { getError } from "../utils";
+import AllProduct from "./AllProduct";
 
 // define reducer function
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'FETCH_REQUEST':
+    case "FETCH_REQUEST":
       return { ...state, loading: true };
-    case 'FETCH_SUCCESS':
+    case "FETCH_SUCCESS":
       return {
         ...state,
         products: action.payload.products,
         sellers: action.payload.sellers,
         loading: false,
       };
-    case 'FETCH_FAIL':
+    case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
 
     default:
@@ -38,7 +36,7 @@ export default function HomeScreen() {
     reducer,
     {
       loading: true,
-      error: '',
+      error: "",
     }
   );
 
@@ -46,13 +44,13 @@ export default function HomeScreen() {
     const fetchData = async () => {
       try {
         const { data: products } = await Axios.get(
-          '/api/products/top-products'
+          "/api/products/top-products"
         );
-        const { data: sellers } = await Axios.get('/api/users/top-sellers');
-        dispatch({ type: 'FETCH_SUCCESS', payload: { products, sellers } });
+        const { data: sellers } = await Axios.get("/api/users/top-sellers");
+        dispatch({ type: "FETCH_SUCCESS", payload: { products, sellers } });
       } catch (error) {
         dispatch({
-          type: 'FETCH_FAIL',
+          type: "FETCH_FAIL",
           payload: getError(error),
         });
       }
@@ -69,8 +67,32 @@ export default function HomeScreen() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
+          <AllProduct />
+
           <Row>
-            <h2>Featured Sellers</h2>
+            <p></p>
+          </Row>
+
+          <Row>
+            <p></p>
+          </Row>
+          <Row>
+            <h2>Top Products</h2>
+          </Row>
+
+          {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
+          <Row>
+            {products.map((product) => (
+              <Col sm={6} md={4} lg={3} key={product._id} className="mb-3">
+                <Product product={product}></Product>
+              </Col>
+            ))}
+          </Row>
+          <Row>
+            <p></p>
+          </Row>
+          <Row>
+            <h2>Our Brands</h2>
           </Row>
           {sellers.length === 0 && <MessageBox>No Seller Found</MessageBox>}
           <Row>
@@ -85,26 +107,8 @@ export default function HomeScreen() {
               ))}
             </Carousel>
           </Row>
-          <Row>
-            <p></p>
-          </Row>
-          <Row>
-            <h2>Featured Products</h2>
-          </Row>
-
-          {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
-          <Row>
-            {products.map((product) => (
-              <Col sm={6} md={4} lg={3} key={product._id} className="mb-3">
-                <Product product={product}></Product>
-              </Col>
-            ))}
-          </Row>
-
-          <AllProduct />
         </>
       )}
-
     </div>
   );
 }
