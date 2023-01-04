@@ -21,7 +21,6 @@ productRouter.get(
   })
 );
 
-
 productRouter.get(
   "/sellers/:id", // 1st parameter - api address
   expressAsyncHandler(
@@ -264,7 +263,7 @@ productRouter.post(
         name: "sample name " + Date.now(),
         slug: "sample-name-" + Date.now(),
         seller: req.user._id,
-        image: "/images/p1.jpg",
+        image: "enter url for product",
         price: 0,
         category: "sample category",
         brand: "sample brand",

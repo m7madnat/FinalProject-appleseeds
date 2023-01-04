@@ -192,7 +192,7 @@ export default function ProductEditScreen() {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="image">
-            <Form.Label>Image File</Form.Label>
+            <Form.Label>Image</Form.Label>
             <Form.Control
               value={image}
               onChange={(e) => setImage(e.target.value)}

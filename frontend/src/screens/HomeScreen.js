@@ -9,6 +9,9 @@ import MessageBox from '../components/MessageBox';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import { getError } from '../utils';
+import AllProduct from './AllProduct';
+
+
 
 // define reducer function
 const reducer = (state, action) => {
@@ -97,8 +100,11 @@ export default function HomeScreen() {
               </Col>
             ))}
           </Row>
+
+          <AllProduct />
         </>
       )}
+
     </div>
   );
 }
