@@ -1,2 +1,2 @@
-# FinalProject-appleseeds
+# FootieShop ECommerce Site
 
