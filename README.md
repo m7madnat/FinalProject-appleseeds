@@ -20,7 +20,7 @@
 ## 🚀 Live Demo:
 https://m7madshop.onrender.com/
 <br><br>
-- When you open the link, you must wait one to two minutes for the site to open without problems
+- When you open the link, you must wait 1-2 minutes for the site to open without problems
 
 <a href="https://m7madshop.onrender.com/" target="_blank">
   <img src="https://i.imgur.com/R5LRDi2.jpg" width=“480” height=“320”>
