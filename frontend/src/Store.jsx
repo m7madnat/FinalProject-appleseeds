@@ -225,42 +225,27 @@ function reducer(
   }
 }
 
-/* StoreProvider - is a Wrapper for React App and pass global props to children */
-/* provedor de dados */
-/* Provedor de Loja */
 export function StoreProvider(
   props // get global props
 ) {
   // get state and dispatch from useReducer
   const [
-    state, // [0] get state from useReducer
-    dispatch, // [1] get dispatch from useReducer
-    // define useReducer
+    state, 
+    dispatch, 
   ] = useReducer(
-    //process.env.NODE_ENV === 'development' ? logger(reducer) : reducer,
-    reducer, // 1st parameter
-    initialState // 2nd parameter
+    reducer, 
+    initialState 
   );
 
-  /* define value object
-   the value contain current state in the context and
-   the dispatch to update state in the context */
-
-  /* context global data */
   const value = {
     state,
     dispatch,
   };
-
-  // return Store ( is comming from react context )
-  // get Provider from the Store object
-  // render {props.children}
   return (
-    /* Provedor de Loja */
     <Store.Provider
-      value={value} // set value to value
+      value={value} 
     >
-      {props.children} {/* All React Components */}
+      {props.children}
     </Store.Provider>
   );
 }
